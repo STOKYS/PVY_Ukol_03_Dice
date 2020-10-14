@@ -1,0 +1,22 @@
+div.player01 {
+    overflow: auto;
+    height: 50px;
+    width: 50%;
+    float: left;
+    height: 1000px;
+    border: 1px solid black;
+}
+
+div.player02 {
+    overflow: auto;
+    height: 50px;
+    width: 50%;
+    float: right;
+    height: 1000px;
+    border: 1px solid black;
+}
+
+#options01 > *{
+    width: 100%;
+    display: none;
+}
