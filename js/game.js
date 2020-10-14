@@ -15,12 +15,14 @@ document.getElementById('roll01').addEventListener('click',
     function () {
         document.getElementById("roll01").disabled = true;
         document.getElementById("end01").disabled = false;
+
         if (played01 == true) {
             roll(player01.one + player01.two + player01.three + player01.four + player01.five + player01.six)
         } else {
             roll(6);
             player01scoreround = 0;
         }
+
     }
 );
 
@@ -457,3 +459,4 @@ document.getElementById("fourth").addEventListener("click", function () {
     player01scoreround += 1500
     end01()
 })
+
