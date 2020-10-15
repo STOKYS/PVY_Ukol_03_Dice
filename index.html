@@ -6,30 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kostka</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            margin: 0;
-        }
-
-        canvas {
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
     <h1>Farkle</h1>
+    <h3 id="round">Round: 1</h3>
     <div>
         <div class="player01">
             <h2>Player 1</h2>
             <p id="score01">Your score: 0</p>
             <p id="score01round">Your score this round: 0</p>
-            <canvas id="canvas01"></canvas>
-            <p id="rolled01"></p>
-            <button id="roll01">Roll</button>
-            <button id="end01" disabled>End Turn</button>
+            <!--<canvas id="canvas01"></canvas>-->
+            <p id="rolled01">You rolled:</p>
+            <div style="width: 80%; margin: auto;">
+                <button id="roll01">Roll</button>
+                <button id="end01" disabled>End Turn</button>
+            </div>
+            <hr>
             <div id="options01">
                 <button id="oneone">Put down 1x 1 (100p)</button>
                 <button id="threeone">Put down 3x 1 (300p)</button>
@@ -65,16 +60,83 @@
         </div>
         <div class="player02">
             <h2>Player 2</h2>
-            <p id="rolled02"></p>
-            <div id="options02">
-
+            <p id="score02">Your score: 0</p>
+            <p id="score02round">Your score this round: 0</p>
+            <!--<canvas id="canvas02"></canvas>-->
+            <p id="rolled02">You rolled: </p>
+            <div style="width: 80%; margin: auto;">
+                <button id="roll02" disabled>Roll</button>
+                <button id="end02" disabled>End Turn</button>
             </div>
-            <button id="roll02" disabled>Roll</button>
-            <button id="end02" disabled>End Turn</button>
+            <hr>
+            <div id="options02">
+                <button id="oneone2">Put down 1x 1 (100p)</button>
+                <button id="threeone2">Put down 3x 1 (300p)</button>
+                <button id="fourone2">Put down 4x 1 (1000p)</button>
+                <button id="fiveone2">Put down 5x 1 (2000p)</button>
+                <button id="sixone2">Put down 6x 1 (3000p)</button>
+                <button id="threetwo2">Put down 3x 2 (200p)</button>
+                <button id="fourtwo2">Put down 4x 2 (1000p)</button>
+                <button id="fivetwo2">Put down 5x 2 (2000p)</button>
+                <button id="sixtwo2">Put down 6x 2 (3000p)</button>
+                <button id="threethree2">Put down 3x 3 (300p)</button>
+                <button id="fourthree2">Put down 4x 3 (1000p)</button>
+                <button id="fivethree2">Put down 5x 3 (2000p)</button>
+                <button id="sixthree2">Put down 6x 3 (3000p)</button>
+                <button id="threefour2">Put down 3x 4 (400p)</button>
+                <button id="fourfour2">Put down 4x 4 (1000p)</button>
+                <button id="fivefour2">Put down 5x 4 (2000p)</button>
+                <button id="sixfour2">Put down 6x 4 (3000p)</button>
+                <button id="onefive2">Put down 1x 5 (50p)</button>
+                <button id="threefive2">Put down 3x 5 (500p)</button>
+                <button id="fourfive2">Put down 4x 5 (1000p)</button>
+                <button id="fivefive2">Put down 5x 5 (2000p)</button>
+                <button id="sixfive2">Put down 6x 5 (3000p)</button>
+                <button id="threesix2">Put down 3x 6 (600p)</button>
+                <button id="foursix2">Put down 4x 6 (1000p)</button>
+                <button id="fivesix2">Put down 5x 6 (2000p)</button>
+                <button id="sixsix2">Put down 6x 6 (3000p)</button>
+                <button id="line2">Put down 1-6 line (1500p)</button>
+                <button id="pair2">Put down 3 pairs (1500p)</button>
+                <button id="triple2">Put down 2 triplets (2500p)</button>
+                <button id="fourth2">Put down 4 of a kind + pair (1500p)</button>
+            </div>
         </div>
     </div>
-    <script src="js/game.js"></script>
-    <script type="module" src="js/three.js"></script>
+    <!--<div style="width: 80%; margin: auto;">
+        <table>
+            <tr>
+                <th>Player 1</th>
+                <th>Player 2</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>-->
+    </div>
+    <!--<script type="module" src="js/three.js"></script>-->
+    <script type="text/javascript" src="js/game.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

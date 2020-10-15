@@ -1,24 +1,93 @@
+@font-face {
+    font-family: Gilroy;
+    src: url(../fonts/Gilroy.otf);
+}
+
+* {
+    color: rgb(215, 215, 215);
+    font-family: 'Gilroy';
+}
+
+h1,h2,h3{
+    text-align: center;
+}
+
+p{
+    padding-left:90px;
+}
+
+body{
+    background-color: black;
+    margin: 0;
+}
+
+button{
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(100, 100, 100);
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    width: 49.7%;
+}
+
+button:disabled{
+    background-color: rgba(53, 53, 53, .5);
+}
+
+hr{
+    width: 80%;
+    border-bottom: 1px white dashed;
+}
+
+canvas {
+    display: block;
+}
+
+table{
+    margin-top: 50px;
+    border: 2px solid grey;
+    width: 100%;
+}
+
+td{
+    border: 1px solid rgb(184, 184, 184);
+    padding: 20px 20px 20px 20px;
+}
+
 div.player01 {
-    overflow: auto;
     height: 50px;
-    width: 50%;
+    width: 49.85%;
     float: left;
-    height: 1000px;
-    border: 1px solid black;
+    height: 500px;
+    border: 1px solid rgb(187, 187, 187);
+    display: table;
 }
 
 div.player02 {
-    overflow: auto;
     height: 50px;
-    width: 50%;
+    width:49.9999%;
     float: right;
-    height: 1000px;
-    border: 1px solid black;
+    height:500px;
+    border: 1px solid rgb(187, 187, 187);
+    display: table;
+}
+
+#options01, #options02{
+    width: 80%;
+    margin: auto;
 }
 
 #options01 > *{
     width: 100%;
     display: none;
+    background-color: rgb(48, 48, 48);
+    color: rgb(184, 184, 184);
+}
+
+#options02 > *{
+    width: 100%;
+    display: none;
+    background-color: rgb(48, 48, 48);
+    color: rgb(184, 184, 184);
 }
 
 #canvas01{
