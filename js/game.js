@@ -28,6 +28,9 @@ let round = 1;
 let turn01 = 0;
 let turn02 = 0;
 
+let arrIMG = ["img1", "img2", "img3", "img4", "img5", "img6"]
+let arrSRC = ["img/dice_1.png", "img/dice_2.png", "img/dice_3.png", "img/dice_4.png", "img/dice_5.png", "img/dice_6.png", "img/dice_background.png"]
+
 document.getElementById('roll01').addEventListener('click',
     function () {
         document.getElementById("roll01").disabled = true;
@@ -91,12 +94,15 @@ function roll(x) {
         five: 0,
         six: 0
     }
+
     for (i = 0; i < x; i++) {
-        player01arr.push(Math.ceil(Math.random() * 6));
+       num = (Math.ceil(Math.random() * 6))
+       player01arr.push(num)
+       numbry = num - 1
+       document.getElementById(arrIMG[i]).src = arrSRC[numbry]
     }
     console.log(player01arr)
     count()
-
 }
 
 function count() {
@@ -299,6 +305,13 @@ function options() {
     }
 
     played01 = true;
+}
+
+function clearImg(){
+    arrIMG.forEach(imag => {
+        console.log(imag)
+        document.getElementById(imag).src = arrSRC[6]
+    });
 }
 
 function clear() {
@@ -959,4 +972,3 @@ document.getElementById("fourth2").addEventListener("click", function () {
     player02scoreround += 1500
     end02()
 })
-

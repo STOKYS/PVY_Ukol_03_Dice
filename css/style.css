@@ -1,6 +1,6 @@
 @font-face {
     font-family: Gilroy;
-    src: url(../fonts/Gilroy.otf);
+    src: url(../font/Gilroy.otf);
 }
 
 * {
@@ -23,14 +23,16 @@ body{
 
 button{
     border: 1px solid rgb(255, 255, 255);
-    background-color: rgb(100, 100, 100);
+    /*background-color: rgb(100, 100, 100);*/
+    background-color: rgba(0,200,0,0.2);
     padding: 8px 10px 8px 10px;
     border-radius: 5px;
     width: 49.7%;
 }
 
 button:disabled{
-    background-color: rgba(53, 53, 53, .5);
+    /*background-color: rgba(53, 53, 53, .5);*/
+    background-color: rgba(200,0,0,0.2);
 }
 
 hr{
@@ -53,11 +55,25 @@ td{
     padding: 20px 20px 20px 20px;
 }
 
+.images{
+    width: 80%;
+    margin: auto;
+    padding-bottom: 120px;
+}
+
+.images>img{
+    width: 16.66667%;
+    padding: 0px;
+    margin: 0px;
+    float: left;
+    display: table;
+}
+
 div.player01 {
     height: 50px;
     width: 49.85%;
     float: left;
-    height: 500px;
+    height: 600px;
     border: 1px solid rgb(187, 187, 187);
     display: table;
 }
@@ -66,7 +82,7 @@ div.player02 {
     height: 50px;
     width:49.9999%;
     float: right;
-    height:500px;
+    height:600px;
     border: 1px solid rgb(187, 187, 187);
     display: table;
 }
