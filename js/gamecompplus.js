@@ -26,8 +26,8 @@ let player02scoreround = 0;
 let played02 = false
 
 let round = 1;
-let turn01 = 0;
-let turn02 = 0;
+let turn01 = false;
+let turn02 = false;
 let times = 0
 let player = 0;
 
@@ -43,9 +43,13 @@ let arrPLY = ["01", "02"]
 document.getElementById('roll01').addEventListener('click',
     function () {
         if (played01 == true) {
+            document.getElementById("roll01").disabled = true;
+            document.getElementById("end01").disabled = true;
             roll01(player01.one + player01.two + player01.three + player01.four + player01.five + player01.six)
         } else {
+            console.log("vypnuto roolovani, ")
             document.getElementById("roll01").disabled = true;
+            document.getElementById("end01").disabled = true;
             player01scoreround = 0;
             played01 = true
             roll01(6);
@@ -56,9 +60,12 @@ document.getElementById('roll01').addEventListener('click',
 document.getElementById('roll02').addEventListener('click',
     function () {
         if (played02 == true) {
+            document.getElementById("roll02").disabled = true;
+            document.getElementById("end02").disabled = true;
             roll02(player02.one + player02.two + player02.three + player02.four + player02.five + player02.six)
         } else {
-            document.getElementById("roll01").disabled = true;
+            document.getElementById("roll02").disabled = true;
+            document.getElementById("end02").disabled = true;
             player02scoreround = 0;
             played02 = true
             roll02(6);
@@ -88,7 +95,6 @@ function end01() {
         six: 0
     }
     played01 = false
-    turn01 = 0;
     document.getElementById("roll01").disabled = true;
     document.getElementById("end01").disabled = true;
     document.getElementById("roll02").disabled = false;
@@ -106,7 +112,6 @@ function end02() {
     document.getElementById("score02").innerText = `Your score: ${player02score}`
     document.getElementById("score02round").innerText = `Your score this round: ${player02scoreround}`
     document.getElementById("round").innerText = `Round ${round}`
-
     player02arr = []
     player02 = {
         one: 0,
@@ -117,7 +122,6 @@ function end02() {
         six: 0
     }
     played02 = false
-    turn02 = 0;
     document.getElementById("roll02").disabled = true;
     document.getElementById("end02").disabled = true;
     document.getElementById("roll01").disabled = false;
@@ -125,7 +129,7 @@ function end02() {
 }
 
 function roll01(x) {
-    turn01 = true
+    clear01(0)
     player01 = {
         one: 0,
         two: 0,
@@ -165,7 +169,7 @@ function roll01(x) {
 
 
 function roll02(x) {
-    turn02 = true
+    clear02(0)
     player02 = {
         one: 0,
         two: 0,
@@ -231,7 +235,6 @@ function options02(i, numbry, p, x) {
 
 
 function ready01(i, numbry, p, x) {
-    times++
     let pairs3 = [];
     let triplets = [];
     let fourth = [];
@@ -246,16 +249,18 @@ function ready01(i, numbry, p, x) {
     }
     if (player01[arrNUM[numbry]] > 1) {
         pairs3.push(arrNUM[numbry]);
+        console.log(pairs3 + " " + fourth)
         if (player01[arrNUM[numbry]] > 2) {
             triplets.push(arrNUM[numbry]);
             document.getElementById("three" + arrNUM[numbry]).style.display = "inline";
             if (player01[arrNUM[numbry]] > 3) {
                 fourth.push(arrNUM[numbry]);
                 for (i = 0; i < pairs3.length; i++) {
-                    if (pairs3[i] == "one") {
+                    if (pairs3[i] == arrNUM[numbry]) {
                         pairs3.splice(i, 1);
                     }
                 }
+                console.log(pairs3 + " " + fourth)
                 document.getElementById("four" + arrNUM[numbry]).style.display = "inline";
                 if (player01[arrNUM[numbry]] > 4) {
                     document.getElementById("five" + arrNUM[numbry]).style.display = "inline";
@@ -278,12 +283,13 @@ function ready01(i, numbry, p, x) {
     if (fourth.length == 1 && pairs3.length == 1) {
         document.getElementById("fourth").style.display = "inline";
     }
+    if (x == player01arr.length) {
+        turn01 = true
+    }
     if (player01.one < 1 && player01.two < 3 && player01.three < 3 && player01.four < 3 && player01.five < 1 && player01.six < 3 && turn01 == true) {
         document.getElementById("roll01").disabled = true;
         document.getElementById("end01").disabled = false;
         player01scoreround = 0;
-        document.getElementById("score01round").innerText = `Your score this round: ${player01scoreround}`
-        document.getElementById("score01").innerText = `Your score: ${player01score}`
     }
     document.getElementById("score01").innerText = `Your score: ${player01score}`
     document.getElementById("score01round").innerText = `Your score this round: ${player01scoreround}`
@@ -312,7 +318,7 @@ function ready02(i, numbry, p, x) {
             if (player02[arrNUM[numbry]] > 3) {
                 fourth.push(arrNUM[numbry]);
                 for (i = 0; i < pairs3.length; i++) {
-                    if (pairs3[i] == "one") {
+                    if (pairs3[i] == arrNUM[numbry]) {
                         pairs3.splice(i, 1);
                     }
                 }
@@ -338,40 +344,47 @@ function ready02(i, numbry, p, x) {
     if (fourth.length == 1 && pairs3.length == 1) {
         document.getElementById("fourth2").style.display = "inline";
     }
+    if (x == player02arr.length) {
+        turn02 = true
+    }
     if (player02.one < 1 && player02.two < 3 && player02.three < 3 && player02.four < 3 && player02.five < 1 && player02.six < 3 && turn02 == true) {
         document.getElementById("roll02").disabled = true;
         document.getElementById("end02").disabled = false;
         player02scoreround = 0;
-        document.getElementById("score02round").innerText = `Your score this round: ${player01scoreround}`
-        document.getElementById("score02").innerText = `Your score: ${player01score}`
     }
     document.getElementById("score02").innerText = `Your score: ${player02score}`
     document.getElementById("score02round").innerText = `Your score this round: ${player02scoreround}`
     document.getElementById("rolled02").innerText = `You rolled: ${player02.one}x One, ${player02.two}x Two, ${player02.three}x Three, ${player02.four}x Four, ${player02.five}x Five, ${player02.six}x Six`
 }
 
-function clear01() {
+function clear01(z) {
     arrIMG.forEach(imag => {
+        document.getElementById("rolled01").innerText = `You rolled:`
         document.getElementById(imag).src = arrSRC[6]
     })
     $("#options01>button").each(function () {
         this.style.display = "none"
     })
-    x = player01arr.length
-    i = 0;
-    options01(i, x, 0)
+    if (z == 1) {
+        x = player01arr.length
+        i = 0;
+        options01(i, x, 0)
+    }
 }
 
-function clear02() {
+function clear02(z) {
+    document.getElementById("rolled02").innerText = `You rolled:`
     arrIMG.forEach(imag => {
         document.getElementById(imag).src = arrSRC[6]
     })
     $("#options02>button").each(function () {
         this.style.display = "none"
     })
-    x = player02arr.length
-    i = 0;
-    options02(i, x, 0)
+    if (z == 1) {
+        x = player02arr.length
+        i = 0;
+        options02(i, x, 0)
+    }
 }
 
 function remove01(numbe, max) {
@@ -383,7 +396,7 @@ function remove01(numbe, max) {
             i--
         }
     }
-    clear01()
+    clear01(1)
 }
 
 function remove02(numbe, max) {
@@ -395,7 +408,7 @@ function remove02(numbe, max) {
             i--
         }
     }
-    clear02()
+    clear02(1)
 }
 
 $('#options01>button').bind("click", function () {
@@ -415,7 +428,8 @@ $('#options01>button').bind("click", function () {
                     g = k + 1
                 }
             }
-            if (h < 7) {
+            console.log(g + " " + h)
+            if (h < 6) {
                 player01[arrEND[g - 1]] -= h
                 if (h >= 4) {
                     player01scoreround += 1000 + (500 * (h - 4))
@@ -461,7 +475,7 @@ $('#options02>button').bind("click", function () {
                     g = k + 1
                 }
             }
-            if (h < 7) {
+            if (h < 6) {
                 player02[arrEND[g - 1]] -= h
                 if (h >= 4) {
                     player02scoreround += 1000 + (500 * (h - 4))
