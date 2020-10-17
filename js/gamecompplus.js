@@ -38,16 +38,22 @@ let arrBTN01 = ["oneone", "threeone", "fourone", "fiveone", "sixone", "threetwo"
 let arrBTN02 = ["oneone2", "threeone2", "fourone2", "fiveone2", "sixone2", "threetwo2", "fourtwo2", "fivetwo2", "sixtwo2", "threethree2", "fourthree2", "fivethree2", "sixthree2", "threefour2", "fourfour2", "fivefour2", "sixfour2", "onefive2", "threefive2", "fourfive2", "fivefive2", "sixfive2", "threesix2", "foursix2", "fivesix2", "sixsix2", "line2", "pair2", "triple2", "fourth2"]
 let arrEND = ["one", "two", "three", "four", "five", "six"]
 let arrSTR = ["one", "three", "four", "five", "six"]
-let arrPLY = ["01", "02"]
+
+let pairs01 = [];
+let triplets01 = [];
+let fourth01 = [];
+let pairs02 = [];
+let triplets02 = [];
+let fourth02 = [];
 
 document.getElementById('roll01').addEventListener('click',
     function () {
+        new Audio('sounds/roll.mp3').play()
         if (played01 == true) {
             document.getElementById("roll01").disabled = true;
             document.getElementById("end01").disabled = true;
             roll01(player01.one + player01.two + player01.three + player01.four + player01.five + player01.six)
         } else {
-            console.log("vypnuto roolovani, ")
             document.getElementById("roll01").disabled = true;
             document.getElementById("end01").disabled = true;
             player01scoreround = 0;
@@ -59,6 +65,7 @@ document.getElementById('roll01').addEventListener('click',
 
 document.getElementById('roll02').addEventListener('click',
     function () {
+        new Audio('sounds/roll.mp3').play()
         if (played02 == true) {
             document.getElementById("roll02").disabled = true;
             document.getElementById("end02").disabled = true;
@@ -235,9 +242,8 @@ function options02(i, numbry, p, x) {
 
 
 function ready01(i, numbry, p, x) {
-    let pairs3 = [];
-    let triplets = [];
-    let fourth = [];
+    let pairtimes01 = 0
+    let triptimes01 = 0
     if (p == 0) {
         numbry -= 1
         document.getElementById(arrIMG[i]).src = arrSRC[numbry]
@@ -248,19 +254,26 @@ function ready01(i, numbry, p, x) {
         document.getElementById("one" + arrNUM[numbry]).style.display = "inline";
     }
     if (player01[arrNUM[numbry]] > 1) {
-        pairs3.push(arrNUM[numbry]);
-        console.log(pairs3 + " " + fourth)
+        pairs01.forEach(pair => {
+            if (pair == arrNUM[numbry]){
+                pairtimes01++
+            }
+        })
+        if (pairtimes01 == 0){
+            pairs01.push(arrNUM[numbry])
+        }
         if (player01[arrNUM[numbry]] > 2) {
-            triplets.push(arrNUM[numbry]);
+            triplets01.forEach(pair => {
+                if (pair == arrNUM[numbry]){
+                    triptimes01++
+                }
+            })
+            if (triptimes01 == 0){
+                triplets01.push(arrNUM[numbry]);
+            }
             document.getElementById("three" + arrNUM[numbry]).style.display = "inline";
             if (player01[arrNUM[numbry]] > 3) {
-                fourth.push(arrNUM[numbry]);
-                for (i = 0; i < pairs3.length; i++) {
-                    if (pairs3[i] == arrNUM[numbry]) {
-                        pairs3.splice(i, 1);
-                    }
-                }
-                console.log(pairs3 + " " + fourth)
+                fourth01.push(arrNUM[numbry]);
                 document.getElementById("four" + arrNUM[numbry]).style.display = "inline";
                 if (player01[arrNUM[numbry]] > 4) {
                     document.getElementById("five" + arrNUM[numbry]).style.display = "inline";
@@ -274,13 +287,13 @@ function ready01(i, numbry, p, x) {
     if ((player01.one == player01.two) && (player01.one == player01.three) && (player01.one == player01.four) && (player01.one == player01.five) && (player01.one == player01.six) && (player01.one != 0)) {
         document.getElementById("line").style.display = "inline";
     }
-    if (pairs3.length == 3) {
+    if (pairs01.length == 3) {
         document.getElementById("pair").style.display = "inline";
     }
-    if (triplets.length == 2) {
+    if (triplets01.length == 2) {
         document.getElementById("triple").style.display = "inline";
     }
-    if (fourth.length == 1 && pairs3.length == 1) {
+    if (fourth01.length == 1 && pairs01.length == 2) {
         document.getElementById("fourth").style.display = "inline";
     }
     if (x == player01arr.length) {
@@ -297,9 +310,8 @@ function ready01(i, numbry, p, x) {
 }
 
 function ready02(i, numbry, p, x) {
-    let pairs3 = [];
-    let triplets = [];
-    let fourth = [];
+    let pairtimes02 = 0
+    let triptimes02 = 0
     i += 6
     if (p == 0) {
         numbry -= 1
@@ -311,17 +323,26 @@ function ready02(i, numbry, p, x) {
         document.getElementById("one" + arrNUM[numbry] + "2").style.display = "inline";
     }
     if (player02[arrNUM[numbry]] > 1) {
-        pairs3.push(arrNUM[numbry]);
+        pairs02.forEach(pair => {
+            if (pair == arrNUM[numbry]){
+                pairtimes02++
+            }
+        })
+        if (pairtimes02 == 0){
+            pairs02.push(arrNUM[numbry])
+        }
         if (player02[arrNUM[numbry]] > 2) {
-            triplets.push(arrNUM[numbry]);
+            triplets02.forEach(pair => {
+                if (pair == arrNUM[numbry]){
+                    triptimes02++
+                }
+            })
+            if (triptimes02 == 0){
+                triplets02.push(arrNUM[numbry]);
+            }
             document.getElementById("three" + arrNUM[numbry] + "2").style.display = "inline";
             if (player02[arrNUM[numbry]] > 3) {
-                fourth.push(arrNUM[numbry]);
-                for (i = 0; i < pairs3.length; i++) {
-                    if (pairs3[i] == arrNUM[numbry]) {
-                        pairs3.splice(i, 1);
-                    }
-                }
+                fourth02.push(arrNUM[numbry]);
                 document.getElementById("four" + arrNUM[numbry] + "2").style.display = "inline";
                 if (player02[arrNUM[numbry]] > 4) {
                     document.getElementById("five" + arrNUM[numbry] + "2").style.display = "inline";
@@ -335,13 +356,13 @@ function ready02(i, numbry, p, x) {
     if ((player02.one == player02.two) && (player02.one == player02.three) && (player02.one == player02.four) && (player02.one == player02.five) && (player02.one == player02.six) && (player02.one != 0)) {
         document.getElementById("line2").style.display = "inline";
     }
-    if (pairs3.length == 3) {
+    if (pairs02.length == 3) {
         document.getElementById("pair2").style.display = "inline";
     }
-    if (triplets.length == 2) {
+    if (triplets02.length == 2) {
         document.getElementById("triple2").style.display = "inline";
     }
-    if (fourth.length == 1 && pairs3.length == 1) {
+    if (fourth02.length == 1 && pairs02.length == 2) {
         document.getElementById("fourth2").style.display = "inline";
     }
     if (x == player02arr.length) {
@@ -358,6 +379,9 @@ function ready02(i, numbry, p, x) {
 }
 
 function clear01(z) {
+    pairs01 = [];
+    triplets01 = [];
+    fourth01 = [];
     arrIMG.forEach(imag => {
         document.getElementById("rolled01").innerText = `You rolled:`
         document.getElementById(imag).src = arrSRC[6]
@@ -373,6 +397,9 @@ function clear01(z) {
 }
 
 function clear02(z) {
+    pairs02 = [];
+    triplets02 = [];
+    fourth02 = [];
     document.getElementById("rolled02").innerText = `You rolled:`
     arrIMG.forEach(imag => {
         document.getElementById(imag).src = arrSRC[6]
@@ -419,7 +446,10 @@ $('#options01>button').bind("click", function () {
             firstnum = id.substring(0, 2)
             lastnum = id.substring(id.length - 2, id.length)
             for (l = 0; l < arrEND.length; l++) {
-                if (arrEND[l].substring(0, 2) == firstnum) {
+                if (id == "fourth"){
+                    h = 8
+                }
+                else if (arrEND[l].substring(0, 2) == firstnum) {
                     h = l + 1
                 }
             }
@@ -428,7 +458,6 @@ $('#options01>button').bind("click", function () {
                     g = k + 1
                 }
             }
-            console.log(g + " " + h)
             if (h < 6) {
                 player01[arrEND[g - 1]] -= h
                 if (h >= 4) {
@@ -466,7 +495,10 @@ $('#options02>button').bind("click", function () {
             firstnum = id.substring(0, 2)
             lastnum = (id.substring(id.length - 3, id.length)).slice(0, -1)
             for (l = 0; l < arrEND.length; l++) {
-                if (arrEND[l].substring(0, 2) == firstnum) {
+                if (id == "fourth2"){
+                    h = 8
+                }
+                else if (arrEND[l].substring(0, 2) == firstnum) {
                     h = l + 1
                 }
             }
