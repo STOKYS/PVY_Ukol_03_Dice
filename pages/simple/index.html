@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kostka - Simple</title>
+    <link rel="stylesheet" href="../../css/style_simple.css">
+    <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="canvas_box">
+        <div>
+            <canvas id="canvas01"></canvas>
+        </div>
+    </div>
+    <div class="box">
+        <div class="roll_box">
+            <button id="roll">Roll</button>
+        </div>
+        <div class="form_box">
+            <form>
+                <label for="speed">Rotation Speed (Real time)</label>
+                <input type="range" min="1" max="100" value="10" class="slider" id="speed">
+            </form>
+            <p id="demo">0.1 rads (5.730°) per 5 miliseconds</p>
+        </div>
+        <div class="result">
+            <p>You rolled:</p>
+            <h2 id="output">_</h2>
+        </div>
+        <div class="row">
+            <div class="old_rolls">
+                <h3>Old rolls:</h3>
+                <p id="old">0</p>
+            </div>
+            <div class="avrg">
+                <h3>Average:</h3>
+                <p id="average">0</p>
+            </div>
+        </div>
+
+    </div>
+    <script type="module" src="../../js/three.js"></script>
+    <script src="../../js/simple_game.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -9,9 +9,6 @@ import {
     MtlObjBridge
 } from '../node_modules/three/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
 
-let dice1 = 0, dice2 = 0, dice3 = 0, dice4 = 0, dice5 =0, dice6 = 0;
-
-
 const canvas = document.querySelector('#canvas01');
 const renderer = new THREE.WebGLRenderer({
     canvas
@@ -29,28 +26,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('black');
 
 {
-    const planeSize = 40;
-
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load('../img/background.png');
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.magFilter = THREE.NearestFilter;
-    const repeats = planeSize / 2;
-    texture.repeat.set(repeats, repeats);
-
-    const planeGeo = new THREE.PlaneBufferGeometry(planeSize, planeSize);
-    const planeMat = new THREE.MeshPhongMaterial({
-        map: texture,
-        side: THREE.DoubleSide,
-    });
-    const mesh = new THREE.Mesh(planeGeo, planeMat);
-    mesh.rotation.x = Math.PI * -.5;
-    scene.add(mesh);
-}
-
-{
-    const skyColor = 0xB1E1FF; // light blue
+    const skyColor = 0xFFFFFF; // light blue
     const groundColor = 0xB97A20; // brownish orange
     const intensity = 1;
     const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
@@ -61,64 +37,189 @@ scene.background = new THREE.Color('black');
     const color = 0xFFFFFF;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 10, 0);
-    light.target.position.set(-5, 0, 0);
+    light.position.set(0, 0, 0);
+    light.target.position.set(0, 0, 0);
     scene.add(light);
     scene.add(light.target);
 }
 
 {
     const mtlLoader = new MTLLoader();
-    mtlLoader.load('../models/dice.mtl', (mtlParseResult) => {
-        dice1 = new OBJLoader2();
-        dice2 = new OBJLoader2();
-        dice3 = new OBJLoader2();
-        dice4 = new OBJLoader2();
-        dice5 = new OBJLoader2();
-        dice6 = new OBJLoader2();
+    mtlLoader.load('/../../models/dice.mtl', (mtlParseResult) => {
+        let times = 0;
+        let interval = null;
+        const dice = new OBJLoader2();
         const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
-        dice1.addMaterials(materials);
-        dice1.load('../models/dice.obj', (root) => {
+        dice.addMaterials(materials);
+        dice.load('/../../models/dice.obj', (root) => {
             scene.add(root);
-            root.position.y = 1
-            root.position.x = -4
-            root.position.z = -2
-            //root.rotation.x = 1.5708
-        });
-        dice2.addMaterials(materials);
-        dice2.load('../models/dice.obj', (root) => {
-            scene.add(root);
-            root.position.y = 1
+            root.position.y = 0
             root.position.x = 0
-            root.position.z = -2
-        });
-        dice3.addMaterials(materials);
-        dice3.load('../models/dice.obj', (root) => {
-            scene.add(root);
-            root.position.y = 1
-            root.position.x = 4
-            root.position.z = -2
-        });
-        dice4.addMaterials(materials);
-        dice4.load('../models/dice.obj', (root) => {
-            scene.add(root);
-            root.position.y = 1
-            root.position.x = -4
-            root.position.z = 2
-        });
-        dice5.addMaterials(materials);
-        dice5.load('../models/dice.obj', (root) => {
-            scene.add(root);
-            root.position.y = 1
-            root.position.x = 0
-            root.position.z = 2
-        });
-        dice6.addMaterials(materials);
-        dice6.load('../models/dice.obj', (root) => {
-            scene.add(root);
-            root.position.y = 1
-            root.position.x = 4
-            root.position.z = 2
+            root.position.z = 0
+
+            let xInterval = null
+            let yInterval = null
+
+            let arrX = []
+            let arrRotX = [180, 90, 270, 90, 90, 0]
+            let arrRotY = [0, 90, 0, 0, 270, 0]
+
+            var slider = document.getElementById("speed");
+            var output = document.getElementById("demo");
+            let speed = 0.05
+
+            slider.oninput = function () {
+                speed = (this.value) / 200
+                output.innerText = speed + " rads   (" + (speed * 180 / Math.PI).toFixed(3) + "°) per 5 miliseconds";
+            }
+
+            document.getElementById("roll").addEventListener("click", function () {
+                times++
+                if (times % 2 != 0) {
+                    interval = setInterval(roll, 2)
+                } else {
+                    clearInterval(interval)
+                    calculate()
+                }
+            })
+
+            function calculate() {
+                let x = 0
+                if (root.rotation.x >= (315 * Math.PI / 180) || root.rotation.x < (45 * Math.PI / 180)) {
+                    x = 6
+                    fix(6)
+                } else if (root.rotation.x >= (45 * Math.PI / 180) && root.rotation.x < (135 * Math.PI / 180)) {
+                    if (root.rotation.y >= (315 * Math.PI / 180) || root.rotation.y < (45 * Math.PI / 180)) {
+                        x = 4
+                        fix(4)
+                    } else if (root.rotation.y >= (45 * Math.PI / 180) && root.rotation.y < (135 * Math.PI / 180)) {
+                        x = 2
+                        fix(2)
+                    } else if (root.rotation.y >= (135 * Math.PI / 180) && root.rotation.y < (225 * Math.PI / 180)) {
+                        x = 3
+                        fix(3)
+                    } else if (root.rotation.y >= (225 * Math.PI / 180) && root.rotation.y < (315 * Math.PI / 180)) {
+                        x = 5
+                        fix(5)
+                    }
+                } else if (root.rotation.x >= (135 * Math.PI / 180) && root.rotation.x < (225 * Math.PI / 180)) {
+                    x = 1
+                    fix(1)
+                } else if (root.rotation.x >= (225 * Math.PI / 180) && root.rotation.x < (315 * Math.PI / 180)) {
+                    if (root.rotation.y >= (315 * Math.PI / 180) || root.rotation.y < (45 * Math.PI / 180)) {
+                        x = 3
+                        fix(3)
+                    } else if (root.rotation.y >= (45 * Math.PI / 180) && root.rotation.y < (135 * Math.PI / 180)) {
+                        x = 5
+                        fix(5)
+                    } else if (root.rotation.y >= (135 * Math.PI / 180) && root.rotation.y < (225 * Math.PI / 180)) {
+                        x = 4
+                        fix(4)
+                    } else if (root.rotation.y >= (225 * Math.PI / 180) && root.rotation.y < (315 * Math.PI / 180)) {
+                        x = 2
+                        fix(2)
+                    }
+                }
+                document.getElementById("output").innerText = x
+                arrX.push(x)
+                if (arrX.length > 25) {
+                    arrX.splice(0, 1)
+                    arrX[0] = "..."
+                }
+                document.getElementById("old").innerText = arrX
+            }
+
+            function roll() {
+                let random = (Math.floor(Math.random() * 2) + 1);
+                if (random == 1) {
+                    root.rotation.x += speed
+                } else if (random == 2) {
+                    root.rotation.y += speed
+                }
+                if (root.rotation.x >= 2 * Math.PI) {
+                    root.rotation.x = 0
+                }
+                if (root.rotation.y >= 2 * Math.PI) {
+                    root.rotation.y = 0
+                }
+            }
+
+            function fix(num) {
+                let targetX = ((arrRotX[num - 1]) * Math.PI / 180);
+                let targetY = ((arrRotY[num - 1]) * Math.PI / 180);
+                if (targetX < root.rotateOnAxis.x) {
+                    if(((Math.PI * 2) - root.rotation.x + targetX) < (root.rotation.x - targetX)){
+                        xInterval = setInterval(function () {
+                            fixX(targetX, 1)
+                        }, 20)
+                    } else {
+                        xInterval = setInterval(function () {
+                            fixX(targetX, -1)
+                        }, 20)
+                    }
+                } else {
+                    if(((Math.PI * 2) - root.rotation.x + targetX) < (root.rotation.x - targetX)){
+                        xInterval = setInterval(function () {
+                            fixX(targetX, -1)
+                        }, 20)
+                    } else {
+                        xInterval = setInterval(function () {
+                            fixX(targetX, 1)
+                        }, 20)
+                    }
+                }
+               /*if (targetY < root.rotateOnAxis.y) {
+                    if(((Math.PI * 2) - root.rotation.y + targetY) < (root.rotation.y - targetY)){
+                        yInterval = setInterval(function () {
+                            fixY(targetY, 1)
+                        }, 20)
+                    } else {
+                        yInterval = setInterval(function () {
+                            fixY(targetY, -1)
+                        }, 20)
+                    }
+                } else {
+                    if(((Math.PI * 2) - root.rotation.y + targetY) < (root.rotation.y - targetY)){
+                        yInterval = setInterval(function () {
+                            fixY(targetY, 1)
+                        }, 20)
+                    } else {
+                        yInterval = setInterval(function () {
+                            fixY(targetY, -1)
+                        }, 20)
+                    }
+                }*/
+
+            }
+
+            function fixX(target, num) {
+                console.log("x: " + target + " " + num + " " + root.rotation.x)
+                if ((root.rotation.x <= (target + 0.01)) && (root.rotation.x >= (target - 0.01))) {
+                    clearInterval(xInterval)
+                } else {
+                    if (root.rotation.x > 2 * Math.PI) {
+                        root.rotation.x = 0
+                    } else if (root.rotation.x < 0){
+                        root.rotation.x = 2 * Math.PI
+                    }
+                    root.rotation.x += (0.01 * num)
+                }
+
+            }
+
+            function fixY(target, num) {
+                console.log("y: " + target + " " + num + " " + root.rotation.y)
+                if ((root.rotation.y <= (target + 0.01)) && (root.rotation.y >= (target - 0.01))) {
+                    clearInterval(yInterval)
+                } else {
+                    if (root.rotation.y > 2 * Math.PI) {
+                        root.rotation.y = 0
+                    }else if (root.rotation.y < 0){
+                        root.rotation.y = 2 * Math.PI
+                    }
+                    root.rotation.y += (0.01 * num)
+                }
+            }
         });
     });
 
