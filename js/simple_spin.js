@@ -15,7 +15,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 const fov = 50;
-const aspect = 1; // the canvas default
+const aspect = 1;
 const near = 0.1;
 const far = 100;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
@@ -57,6 +57,8 @@ scene.background = new THREE.Color('black');
             root.position.x = 0
             root.position.z = 0
 
+            let game = 0
+
             let xInterval = null
             let yInterval = null
 
@@ -77,14 +79,39 @@ scene.background = new THREE.Color('black');
                 output.innerText = speed + " rads   (" + (speed * 180 / Math.PI).toFixed(3) + "°) per 2 miliseconds";
             }
 
+            document.getElementById("roll_option02").addEventListener("click", function () {
+                document.getElementById("roll_option02").disabled = true
+                document.getElementById("roll_option01").disabled = false
+                document.getElementById("form_box").style.display = "none"
+                root.rotation.x = 0
+                root.rotation.y = 0
+                game = 1
+            })
+
+            document.getElementById("roll_option01").addEventListener("click", function () {
+                document.getElementById("roll_option01").disabled = true
+                document.getElementById("roll_option02").disabled = false
+                document.getElementById("form_box").style.display = "block"
+                root.rotation.x = 0
+                root.rotation.y = 0
+                game = 0
+            })
+
             document.getElementById("roll").addEventListener("click", function () {
-                times++
-                if (times % 2 != 0) {
-                    interval = setInterval(roll, 2)
+                if (game == 0) {
+                    times++
+                    if (times % 2 != 0) {
+                        interval = setInterval(roll, 2)
+                    } else {
+                        clearInterval(interval)
+                        calculate()
+                    }
                 } else {
-                    clearInterval(interval)
-                    calculate()
+                    clearInterval(xInterval)
+                    clearInterval(yInterval)
+                    getTo()
                 }
+
             })
 
             function calculate() {
@@ -128,11 +155,11 @@ scene.background = new THREE.Color('black');
             }
 
             function roll() {
-                let random = (Math.floor(Math.random() * 2) + 1);
-                if (random == 1) {
-                    root.rotation.x += speed
-                } else if (random == 2) {
+                let random = (Math.floor(Math.random() * 4) + 1);
+                if (random % 4 == 0) {
                     root.rotation.y += speed
+                } else {
+                    root.rotation.x += speed
                 }
                 if (root.rotation.x >= 2 * Math.PI) {
                     root.rotation.x = 0
@@ -142,74 +169,71 @@ scene.background = new THREE.Color('black');
                 }
             }
 
+            function getTo() {
+                let random = (Math.floor(Math.random() * 6) + 1)
+                document.getElementById("output").innerText = random
+                arrX.push(random)
+                if (arrX.length > 25) {
+                    arrX.splice(0, 1)
+                    arrX[0] = "..."
+                }
+                all += random
+                quantity++
+                average = (all / quantity)
+                document.getElementById("average").innerText = average.toFixed(2)
+                document.getElementById("old").innerText = arrX
+                let targetX = ((arrRotX[random - 1]) * Math.PI / 180);
+                let targetY = ((arrRotY[random - 1]) * Math.PI / 180);
+                if (targetX != root.rotation.x) {
+                    if (targetX > root.rotation.x) {
+                        xInterval = setInterval(function () {
+                            fixX(targetX, 1)
+                        }, 20)
+                    } else {
+                        xInterval = setInterval(function () {
+                            fixX(targetX, -1)
+                        }, 20)
+                    }
+                }
+                if (targetY != root.rotation.y) {
+                    if (targetY > root.rotation.y) {
+                        yInterval = setInterval(function () {
+                            fixY(targetY, 1)
+                        }, 20)
+                    } else {
+                        yInterval = setInterval(function () {
+                            fixY(targetY, -1)
+                        }, 20)
+                    }
+                }
+            }
 
-            // not working now
-            /*  function fix(num) {
-                  console.log(((arrRotX[num - 1]) * Math.PI / 180))
-                  let targetX = ((arrRotX[num - 1]) * Math.PI / 180);
-                  let targetY = ((arrRotY[num - 1]) * Math.PI / 180);
-                  if ((targetX > root.rotation.x) && num != 6 && num != 5 && num !=2) {
-                          xInterval = setInterval(function () {
-                              fixX(targetX, 1)
-                          }, 20)
-                  } else if ((targetX < root.rotation.x) && num != 6 && num != 5 && num !=2){
-                          xInterval = setInterval(function () {
-                              fixX(targetX, -1)
-                          }, 20)
-                  }
-                  
-                 if (targetY < root.rotation.y) {
-                      if(((Math.PI * 2) - root.rotation.y + targetY) > (root.rotation.y - targetY)){
-                          yInterval = setInterval(function () {
-                              fixY(targetY, 1)
-                          }, 20)
-                      } else {
-                          yInterval = setInterval(function () {
-                              fixY(targetY, -1)
-                          }, 20)
-                      }
-                  } else {
-                      if(((Math.PI * 2) - root.rotation.y + targetY) < (root.rotation.y - targetY)){
-                          yInterval = setInterval(function () {
-                              fixY(targetY, 1)
-                          }, 20)
-                      } else {
-                          yInterval = setInterval(function () {
-                              fixY(targetY, -1)
-                          }, 20)
-                      }
-                  }
+            function fixX(target, num) {
+                if ((root.rotation.x <= (target + 0.025)) && (root.rotation.x >= (target - 0.025))) {
+                    clearInterval(xInterval)
+                } else {
+                    if (root.rotation.x > 2 * Math.PI) {
+                        root.rotation.x = 0
+                    } else if (root.rotation.x < 0) {
+                        root.rotation.x = 2 * Math.PI
+                    }
+                    root.rotation.x += (0.025 * num)
+                }
 
-              }
+            }
 
-              function fixX(target, num) {
-                  console.log("x: " + target + " " + num + " " + root.rotation.x)
-                  if ((root.rotation.x <= (target + 0.01)) && (root.rotation.x >= (target - 0.01))) {
-                      clearInterval(xInterval)
-                  } else {
-                      if (root.rotation.x > 2 * Math.PI) {
-                          root.rotation.x = 0
-                      } else if (root.rotation.x < 0){
-                          root.rotation.x = 2 * Math.PI
-                      }
-                      root.rotation.x += (0.01 * num)
-                  }
-
-              }
-
-              function fixY(target, num) {
-                  console.log("y: " + target + " " + num + " " + root.rotation.y)
-                  if ((root.rotation.y <= (target + 0.01)) && (root.rotation.y >= (target - 0.01))) {
-                      clearInterval(yInterval)
-                  } else {
-                      if (root.rotation.y > 2 * Math.PI) {
-                          root.rotation.y = 0
-                      }else if (root.rotation.y < 0){
-                          root.rotation.y = 2 * Math.PI
-                      }
-                      root.rotation.y += (0.01 * num)
-                  }
-              }*/
+            function fixY(target, num) {
+                if ((root.rotation.y <= (target + 0.025)) && (root.rotation.y >= (target - 0.025))) {
+                    clearInterval(yInterval)
+                } else {
+                    if (root.rotation.y > 2 * Math.PI) {
+                        root.rotation.y = 0
+                    } else if (root.rotation.y < 0) {
+                        root.rotation.y = 2 * Math.PI
+                    }
+                    root.rotation.y += (0.025 * num)
+                }
+            }
         });
     });
 

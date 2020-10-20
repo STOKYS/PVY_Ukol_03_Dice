@@ -8,34 +8,34 @@
     font-family: 'Gilroy';
 }
 
-body{
+body {
     background-color: rgb(0, 0, 0);
     margin: 0px;
     padding: 0px;
 }
 
-canvas{
+canvas {
     width: 100%;
 }
 
-.canvas_box{
+.canvas_box {
     width: 60%;
     margin: auto;
     background-color: black;
 }
 
-.box{
+.box {
     position: absolute;
     bottom: 0;
     left: 30%;
     margin: auto;
     width: 40%;
-    background-color: rgba(50,50,50, 0.2);
+    background-color: rgba(50, 50, 50, 0.2);
     border: 1px solid white;
     border-radius: 20px;
 }
 
-#roll{
+#roll {
     border: 1px solid rgb(255, 255, 255);
     padding: 8px 10px 8px 10px;
     border-radius: 5px;
@@ -44,7 +44,7 @@ canvas{
     width: 100%;
 }
 
-.roll_box{
+.roll_box {
     padding-top: 20px;
     width: 80%;
     margin: auto;
@@ -55,33 +55,58 @@ canvas{
     font-size: 30px;
 }
 
-.result>h2{
+.result>h2 {
     font-size: 50px;
 }
 
-.form_box{
+#form_box {
     margin: auto;
     padding-top: 50px;
     width: 80%;
 }
 
-#speed{
+#speed {
     width: 100%;
 }
 
-.old_rolls{
+.old_rolls {
     width: 80%;
     margin: auto;
     float: left;
 }
 
-.avrg{
+.avrg {
     float: left;
 }
 
-.row > div{
+.row>div {
     text-align: center;
     padding: 1%;
     width: 48%;
     display: block;
+}
+
+.roll_option_box{
+    width: 80%;
+    margin: auto;
+}
+
+.roll_option_box>button {
+    margin-top: 20px;
+    float: left;
+    width: 50%;
+    padding: 8px 10px 8px 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(48, 48, 48);
+    color: rgb(184, 184, 184);
+}
+.roll_option_box>button:disabled {
+    background-color: rgb(7, 7, 7);
+}
+
+#type{
+    color: grey;
+    margin: 5px 0 0 0;
+    text-align: center;
 }
