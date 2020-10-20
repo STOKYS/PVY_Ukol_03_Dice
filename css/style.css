@@ -123,3 +123,47 @@ div.player02 {
     background-color: rgba(185, 185, 13, 0.5) !important;
     color: white !important;
 }
+
+.titlescreen{
+    margin: auto;
+    margin-top: 7.5%;
+    width: 80%;
+    height: 80%;
+}
+
+.titlescreen>button{
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 4s ease, font-size 2s ease, border 2s ease, color 2s ease;
+    width: 40%;
+    margin: 4.9%;
+    height: 512px;
+    font-size: 85px;
+    background-color: rgba(50,50,50,0.2);
+}
+
+.name>h1{
+    padding: 0px;
+    opacity: 0;
+    transition: opacity 4s ease;
+    font-size: 80px;
+    text-align: center;
+}
+
+#end{
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background-color: rgb(0, 0, 0);
+    width: 50%;
+    height: 350px;
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 20px;
+}
+
+#end>h1, #end>p{
+    font-size: 50px;
+    text-align: center;
+    padding: 20px 0 20px 0;
+}

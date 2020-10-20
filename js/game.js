@@ -32,7 +32,7 @@ let times = 0
 let player = 0;
 
 let arrIMG = ["img1", "img2", "img3", "img4", "img5", "img6", "img7", "img8", "img9", "img10", "img11", "img12"]
-let arrSRC = ["img/dice_1.png", "img/dice_2.png", "img/dice_3.png", "img/dice_4.png", "img/dice_5.png", "img/dice_6.png", "img/dice_background.png"]
+let arrSRC = ["../../img/dice_1.png", "../../img/dice_2.png", "../../img/dice_3.png", "../../img/dice_4.png", "../../img/dice_5.png", "../../img/dice_6.png", "../../img/dice_background.png"]
 let arrNUM = ["one", "two", "three", "four", "five", "six"]
 let arrBTN01 = ["oneone", "threeone", "fourone", "fiveone", "sixone", "threetwo", "fourtwo", "fivetwo", "sixtwo", "threethree", "fourthree", "fivethree", "sixthree", "threefour", "fourfour", "fivefour", "sixfour", "onefive", "threefive", "fourfive", "fivefive", "sixfive", "threesix", "foursix", "fivesix", "sixsix", "line", "pair", "triple", "fourth"]
 let arrBTN02 = ["oneone2", "threeone2", "fourone2", "fiveone2", "sixone2", "threetwo2", "fourtwo2", "fivetwo2", "sixtwo2", "threethree2", "fourthree2", "fivethree2", "sixthree2", "threefour2", "fourfour2", "fivefour2", "sixfour2", "onefive2", "threefive2", "fourfive2", "fivefive2", "sixfive2", "threesix2", "foursix2", "fivesix2", "sixsix2", "line2", "pair2", "triple2", "fourth2"]
@@ -46,9 +46,15 @@ let pairs02 = [];
 let triplets02 = [];
 let fourth02 = [];
 
+document.onkeyup = function(key){
+    if (key.keyCode == 13 && (player01score > 9999 || player02score > 9999)){
+        location.reload(); 
+    }
+}
+
 document.getElementById('roll01').addEventListener('click',
     function () {
-        new Audio('sounds/roll.mp3').play()
+        new Audio('../../sounds/roll.mp3').play()
         if (played01 == true) {
             document.getElementById("roll01").disabled = true;
             document.getElementById("end01").disabled = true;
@@ -65,7 +71,7 @@ document.getElementById('roll01').addEventListener('click',
 
 document.getElementById('roll02').addEventListener('click',
     function () {
-        new Audio('sounds/roll.mp3').play()
+        new Audio('../../sounds/roll.mp3').play()
         if (played02 == true) {
             document.getElementById("roll02").disabled = true;
             document.getElementById("end02").disabled = true;
@@ -86,7 +92,7 @@ document.getElementById('end02').addEventListener('click', end02);
 function end01() {
     player01score += player01scoreround
     if (player01score >= 10000) {
-        console.log("Player 1 won")
+        document.getElementById("end").style.display = "inline"
     }
     player01scoreround = 0
     clear01();
@@ -112,7 +118,8 @@ function end02() {
     round++
     player02score += player02scoreround
     if (player02score >= 10000) {
-        console.log("Player 2 won")
+        document.getElementById("end").style.display = "inline"
+        document.getElementById("end_text").innerText = "Player 2 Won!"
     }
     player02scoreround = 0
     clear02();

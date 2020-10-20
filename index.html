@@ -1,163 +1,22 @@
-<!DOCTYPE html>
-<html lang="cs">
-
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Dice</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kostka</title>
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-</head>
-
-<body>
-    <h1>Farkle</h1>
-    <h3 id="round">Round: 1</h3>
-    <div>
-        <div class="player01">
-            <h2>Player 1</h2>
-            <p id="score01">Your score: 0</p>
-            <div class="images">
-                <img src="img/dice_background.png" id="img1">
-                <img src="img/dice_background.png" id="img2">
-                <img src="img/dice_background.png" id="img3">
-                <img src="img/dice_background.png" id="img4">
-                <img src="img/dice_background.png" id="img5">
-                <img src="img/dice_background.png" id="img6">
-            </div>
-            <p id="score01round">Your score this round: 0</p>
-            <p id="rolled01">You rolled:</p>
-            <div class="mainbtn">
-                <button id="roll01">Roll</button>
-                <button id="end01" disabled>End Turn</button>
-            </div>
-            <hr>
-            <div id="options01">
-                <button id="oneone">Put down 1x 1 (100p)</button>
-                <button id="threeone">Put down 3x 1 (300p)</button>
-                <button id="fourone">Put down 4x 1 (1000p)</button>
-                <button id="fiveone">Put down 5x 1 (2000p)</button>
-                <button id="sixone">Put down 6x 1 (3000p)</button>
-                <button id="threetwo">Put down 3x 2 (200p)</button>
-                <button id="fourtwo">Put down 4x 2 (1000p)</button>
-                <button id="fivetwo">Put down 5x 2 (2000p)</button>
-                <button id="sixtwo">Put down 6x 2 (3000p)</button>
-                <button id="threethree">Put down 3x 3 (300p)</button>
-                <button id="fourthree">Put down 4x 3 (1000p)</button>
-                <button id="fivethree">Put down 5x 3 (2000p)</button>
-                <button id="sixthree">Put down 6x 3 (3000p)</button>
-                <button id="threefour">Put down 3x 4 (400p)</button>
-                <button id="fourfour">Put down 4x 4 (1000p)</button>
-                <button id="fivefour">Put down 5x 4 (2000p)</button>
-                <button id="sixfour">Put down 6x 4 (3000p)</button>
-                <button id="onefive">Put down 1x 5 (50p)</button>
-                <button id="threefive">Put down 3x 5 (500p)</button>
-                <button id="fourfive">Put down 4x 5 (1000p)</button>
-                <button id="fivefive">Put down 5x 5 (2000p)</button>
-                <button id="sixfive">Put down 6x 5 (3000p)</button>
-                <button id="threesix">Put down 3x 6 (600p)</button>
-                <button id="foursix">Put down 4x 6 (1000p)</button>
-                <button id="fivesix">Put down 5x 6 (2000p)</button>
-                <button id="sixsix">Put down 6x 6 (3000p)</button>
-                <button id="line" class="special">Put down 1-6 line (1500p)</button>
-                <button id="pair" class="special">Put down 3 pairs (1500p)</button>
-                <button id="triple" class="special">Put down 2 triplets (2500p)</button>
-                <button id="fourth" class="special">Put down 4 of a kind + pair (1500p)</button>
-            </div>
-        </div>
-        <div class="player02">
-            <h2>Player 2</h2>
-            <p id="score02">Your score: 0</p>
-            <div class="images">
-                <img src="img/dice_background.png" id="img7">
-                <img src="img/dice_background.png" id="img8">
-                <img src="img/dice_background.png" id="img9">
-                <img src="img/dice_background.png" id="img10">
-                <img src="img/dice_background.png" id="img11">
-                <img src="img/dice_background.png" id="img12">
-            </div>
-            <p id="score02round">Your score this round: 0</p>
-            <p id="rolled02">You rolled: </p>
-            <div class="mainbtn">
-                <button id="roll02" disabled>Roll</button>
-                <button id="end02" disabled>End Turn</button>
-            </div>
-            <hr>
-            <div id="options02">
-                <button id="oneone2">Put down 1x 1 (100p)</button>
-                <button id="threeone2">Put down 3x 1 (300p)</button>
-                <button id="fourone2">Put down 4x 1 (1000p)</button>
-                <button id="fiveone2">Put down 5x 1 (2000p)</button>
-                <button id="sixone2">Put down 6x 1 (3000p)</button>
-                <button id="threetwo2">Put down 3x 2 (200p)</button>
-                <button id="fourtwo2">Put down 4x 2 (1000p)</button>
-                <button id="fivetwo2">Put down 5x 2 (2000p)</button>
-                <button id="sixtwo2">Put down 6x 2 (3000p)</button>
-                <button id="threethree2">Put down 3x 3 (300p)</button>
-                <button id="fourthree2">Put down 4x 3 (1000p)</button>
-                <button id="fivethree2">Put down 5x 3 (2000p)</button>
-                <button id="sixthree2">Put down 6x 3 (3000p)</button>
-                <button id="threefour2">Put down 3x 4 (400p)</button>
-                <button id="fourfour2">Put down 4x 4 (1000p)</button>
-                <button id="fivefour2">Put down 5x 4 (2000p)</button>
-                <button id="sixfour2">Put down 6x 4 (3000p)</button>
-                <button id="onefive2">Put down 1x 5 (50p)</button>
-                <button id="threefive2">Put down 3x 5 (500p)</button>
-                <button id="fourfive2">Put down 4x 5 (1000p)</button>
-                <button id="fivefive2">Put down 5x 5 (2000p)</button>
-                <button id="sixfive2">Put down 6x 5 (3000p)</button>
-                <button id="threesix2">Put down 3x 6 (600p)</button>
-                <button id="foursix2">Put down 4x 6 (1000p)</button>
-                <button id="fivesix2">Put down 5x 6 (2000p)</button>
-                <button id="sixsix2">Put down 6x 6 (3000p)</button>
-                <button id="line2" class="special">Put down 1-6 line (1500p)</button>
-                <button id="pair2" class="special">Put down 3 pairs (1500p)</button>
-                <button id="triple2" class="special">Put down 2 triplets (2500p)</button>
-                <button id="fourth2" class="special">Put down 4 of a kind + pair (1500p)</button>
-            </div>
-        </div>
-    </div>
-    <a href="pages/simple/index.html">Simple roll</a>
-    <!--<div style="width: 80%; margin: auto;">
-        <table>
-            <tr>
-                <th>Player 1</th>
-                <th>Player 2</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PtZlur9Kmb8" frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen></iframe>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="server.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
-</body>
-
+  </head>
+  <body style="background-image: url(img/title.png); background-repeat: no-repeat;">
+      <div class="titlescreen">
+          <button>Farkle</button>
+          <button>Roll</button>
+      </div>
+      <div class="name">
+        <h1>David Stoček</h1>
+      </div>
+      <script src="js/titlescreen.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
