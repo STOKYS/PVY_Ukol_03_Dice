@@ -1,13 +1,14 @@
-import * as THREE from '../node_modules/three/build/three.module.js';
+import * as THREE from 'https://unpkg.com/three@0.121.1/build/three.module.js';
+
 import {
     OBJLoader2
-} from '../node_modules/three/examples/jsm/loaders/OBJLoader2.js';
+} from 'https://unpkg.com/three@0.121.1/examples/jsm/loaders/OBJLoader2.js';
 import {
     MTLLoader
-} from '../node_modules/three/examples/jsm/loaders/MTLLoader.js';
+} from 'https://unpkg.com/three@0.121.1/examples/jsm/loaders/MTLLoader.js';
 import {
     MtlObjBridge
-} from '../node_modules/three/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+} from 'https://unpkg.com/three@0.121.1/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
 
 const canvas = document.querySelector('#canvas01');
 const renderer = new THREE.WebGLRenderer({
@@ -109,6 +110,7 @@ scene.background = new THREE.Color('black');
                 } else {
                     clearInterval(xInterval)
                     clearInterval(yInterval)
+                    clearInterval(interval)
                     getTo()
                 }
 

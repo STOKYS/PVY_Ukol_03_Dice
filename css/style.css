@@ -87,20 +87,12 @@ div.player02 {
     display: table;
 }
 
-#options01,
-#options02 {
+.options {
     width: 80%;
     margin: auto;
 }
 
-#options01>* {
-    width: 100%;
-    display: none;
-    background-color: rgb(48, 48, 48);
-    color: rgb(184, 184, 184);
-}
-
-#options02>* {
+.options>* {
     width: 100%;
     display: none;
     background-color: rgb(48, 48, 48);
